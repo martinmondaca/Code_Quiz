@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Code Quiz</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+         <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <header class="text-center">
+            <h1>Code Quiz</h1>
+        </header>
+
+        <section class="container" id="beginSection">
+            <div class="row">
+                <div class="col">
+                    <h2>Quiz Rules:</h2>
+                    <ul>
+                        <li>You have 60 seconds on the clock to answer 10 questions.</li>
+                        <li>A correct answer earns you 100 points.</li>
+                        <li>An incorrect answer loses you 25 points and a 5 second penalty.</li>
+                        <li>When ready to start click <strong>Begin</strong> and best of luck!</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="row text-center">
+                <div class="col-3"></div>
+                <div class="col-3">
+                    <button type="button" class="btn btn-info btn-lg" id="beginQuiz">Begin Quiz</button>
+                </div>
+                <div class = "col-3">
+                    <button type="button" class="btn btn-info btn-lg" id="seeScores">High Scores</button>
+                </div>
+                <div class="col-3"></div>
+            </div>
+        </section>
+
+        <section class="container hide" id="quizHolder">
+            <div class="row">
+                <div class="col">
+                    <h5>Timer: <span id= "secondsLeft"></span> Seconds left</h5>
+                </div>
+                <div class="col">
+                    <h5>Score: <span id ="currentScore"></span></h5>
+                </div>
+            </div>
+            <div class="row">
+                <div class ="col">
+                <h3 id="currentQuestion">1. Question</h3>
+            </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <button type="button" class="btn btn-light btn-lg btn-block text-left" id="answerA"></button>
+                    <button type="button" class="btn btn-light btn-lg btn-block text-left" id="answerB"></button>
+                    <button type="button" class="btn btn-light btn-lg btn-block text-left" id="answerC"></button>
+                    <button type="button" class="btn btn-light btn-lg btn-block text-left" id="answerD"></button>
+                </div>
+            </div>
+        </section>
+
+        <section class="container hide" id="finalResults">
+            <div class="row text-center">
+                <div class="col">
+                    <h1 class=>Time's Up!</h1>
+                </div>
+            </div>
+            <div class="row text-center">
+                <div class="col">
+                    <h3>Your Final Score is:<span id=finalScore></span></h3>
+                </div>
+            </div>
+                
+            <form>
+                <div class="row text-center">
+                <div class="col-3"></div>
+                <div class="col-6 col-offset-6" >
+                  <div class="input-group">
+                    <div class="input-group-text">Your name:</div>
+                    <input type="text" class="form-control" id="nameInput" placeholder="name">
+                  </div>
+                </div>
+                <div class="col-3"></div>
+                </div>
+            </form>
+                <div class="row text-center">
+                    <div class="col-4"></div>
+                    <div class="col-4">
+                        <button type="button" class="btn btn-primary" id ="saveYourScore">Save Your High Score</button>
+                    </div>
+                    <div class="col-4"></div>
+                </div>
+        </section>
+
+        <section class="container hide" id="leaderboardBox">
+            <div class="row text-center" id = "leaderboard">
+                <h3>Leaderboard:</h3>
+            </div>
+            <div class = "row text-center">
+                <div class = "col">
+                    <a href ="quiz.html" type = "button" class = "btn btn-info btn-lg" id="goToQuiz">Play Again</a>
+                </div>
+            </div>
+            <div class = "row text-center button-holder">
+                <div class = "col">
+                    <a type = "button" class = "btn btn-info btn-lg" id="clearScores">Clear High Scores</a>
+                </div>
+            </div>
+        </section>
+
+      <script src="script.js"></script>
+    </body>
+</html>
