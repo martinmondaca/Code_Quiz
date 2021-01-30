@@ -1,0 +1,35 @@
+header {
+    color:white;
+    background-color: teal;
+}
+
+body {
+    background-color: aliceblue;
+}
+
+div {
+    padding: 5px;
+}
+
+section {
+    border: 10px solid black; 
+    border-radius: 5px;
+    margin: 50px 0px 0px 0px;
+    box-shadow: 0 0 10px 2px;
+}
+
+.btn {
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.btn:hover {
+    transform: scale(1.04)
+}
+
+.hide {
+    display: none;
+}
+
+.nameInputBox {
+    width: 75px;
+}
