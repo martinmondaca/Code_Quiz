@@ -5,6 +5,7 @@ header {
 
 body {
     background-color: aliceblue;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 div {
@@ -18,10 +19,6 @@ section {
     box-shadow: 0 0 10px 2px;
 }
 
-.btn {
-    font-family: 'Courier New', Courier, monospace;
-}
-
 .btn:hover {
     transform: scale(1.04)
 }
@@ -30,6 +27,6 @@ section {
     display: none;
 }
 
-.nameInputBox {
-    width: 75px;
+.individualScore {
+    font-weight: 500px
 }
