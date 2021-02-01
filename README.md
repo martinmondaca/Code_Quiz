@@ -23,7 +23,7 @@ There are several features that would be ideal to implement in the future. Some 
 ![Screenshot of Results page](images/quiz-results.png)
 
 ### Screenshot of saved scores
-![Screenshot of saved scores](saved-recent-scores.png)
+![Screenshot of saved scores](images/saved-recent-scores.png)
 
 ## Installation
 
