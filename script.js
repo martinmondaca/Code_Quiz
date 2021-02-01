@@ -19,47 +19,35 @@ var clearScoresBtn = document.querySelector("#clearScores")
 var retakeQuizBtn = document.querySelector("#retakeQuiz")
 
 
+var answerButtons = [optionOne, optionTwo, optionThree, optionFour]
 var score = 0;
 var questionNumber = 0;
-var timer = 10;
+var timer = 60;
+var timerIsRunning;
 
 retakeQuizBtn.addEventListener("click", function () {
     beginSection.setAttribute("class", "container");
     quizSection.setAttribute("class", "container hide");
     finalResultScreen.setAttribute("class", "container hide");
     leaderboardView.setAttribute("class", "container hide");
+});
 
-})
-
-if (localStorage.getItem("codeQuizLeaderScores") === null) {
-    localStorage.setItem("codeQuizLeaderScores", "[]")
-} else {
-    console.log("hi");
-}
+initLocalStorage();
 
 //initiates quiz
 beginButton.addEventListener("click", function () {
-    timer = 10;
     score = 0;
     questionNumber = 0;
-    currentScore.innerHTML = score;
+    timer = 60;
     initiateTimer(timer);
-
-    renderLearboard()
-    if (localStorage.getItem("codeQuizLeaderScores") === null) {
-        localStorage.setItem("codeQuizLeaderScores", "[]")
-    } else {
-        console.log("hi");
-    }
-    displayLeaderboard()
     beginSection.setAttribute("class", "container hide");
     quizSection.setAttribute("class", "container");
+    currentScore.innerHTML = score;
     timeLeft.innerHTML = timer;
-    var timerIsRunning = setInterval(function () {
-        timeLeft.innerHTML = timer;
+    timerIsRunning = setInterval(function () {
         timer--;
-        console.log(timer)
-        if (timer <= -1) {
+        timeLeft.innerHTML = timer;
+        if (timer <= 0) {
             quizSection.setAttribute("class", "container hide");
             finalResultScreen.setAttribute("class", "container");
             leaderboardView.setAttribute("class", "container");
@@ -68,84 +56,70 @@ beginButton.addEventListener("click", function () {
         };
     }, 1000);
     displayQuestions(questionNumber);
+    initLocalStorage()
+    renderLearboard()
+    displayLeaderboard()
 });
 
+//countdown timer
 function initiateTimer(timer) {
-    timeLeft.innerHTML = timer;
     timer--;
+    timeLeft.innerHTML = timer;
 }
 
+//load up each question
 function displayQuestions(currentQuestionIndex) {
+    enableButtons();
     if (currentQuestionIndex >= 10) {
         quizSection.setAttribute("class", "container hide");
         finalResultScreen.setAttribute("class", "container");
         leaderboardView.setAttribute("class", "container");
-        finalScore.innerHTML = " " + score;
-        return;
-    }
-    enableButtons();
-    currentQuestion.innerHTML = JSON.stringify(quizQuestions[currentQuestionIndex].question).replace(/"/g, "");
-
-    optionOne.innerHTML = JSON.stringify(quizQuestions[currentQuestionIndex].answers[0].a).replace(/"/g, "");
-    optionTwo.innerHTML = JSON.stringify(quizQuestions[currentQuestionIndex].answers[1].b).replace(/"/g, "");
-    optionThree.innerHTML = JSON.stringify(quizQuestions[currentQuestionIndex].answers[2].c).replace(/"/g, "");
-    optionFour.innerHTML = JSON.stringify(quizQuestions[currentQuestionIndex].answers[3].d).replace(/"/g, "");
-
-    optionOne.setAttribute("class", "btn btn-light btn-lg btn-block text-left");
-    optionTwo.setAttribute("class", "btn btn-light btn-lg btn-block text-left");
-    optionThree.setAttribute("class", "btn btn-light btn-lg btn-block text-left");
-    optionFour.setAttribute("class", "btn btn-light btn-lg btn-block text-left");
-
-}
+        finalScore.innerHTML = " " + score + " points";
+        clearInterval(timerIsRunning);
+    } else if (currentQuestionIndex < 10) {
+        currentQuestion.innerHTML = JSON.stringify(quizQuestions[currentQuestionIndex].question).replace(/"/g, "");
+        optionOne.innerHTML = JSON.stringify(quizQuestions[currentQuestionIndex].answers[0].a).replace(/"/g, "");
+        optionTwo.innerHTML = JSON.stringify(quizQuestions[currentQuestionIndex].answers[1].b).replace(/"/g, "");
+        optionThree.innerHTML = JSON.stringify(quizQuestions[currentQuestionIndex].answers[2].c).replace(/"/g, "");
+        optionFour.innerHTML = JSON.stringify(quizQuestions[currentQuestionIndex].answers[3].d).replace(/"/g, "");
+        for (i = 0; i < answerButtons.length; i++) {
+            answerButtons[i].setAttribute("class", "btn btn-light btn-lg btn-block text-left")
+        };
+    };
+};
 
 optionOne.addEventListener("click", function () {
     isCorrect = quizQuestions[questionNumber].answers[0].correct
-    console.log(isCorrect)
     wrongOrRight(optionOne);
     disableButtons();
-    questionNumber++;
-    setTimeout(function () {
-        displayQuestions(questionNumber);
-    }, 1000);
+    nextQuestion();
+
 })
 
 optionTwo.addEventListener("click", function () {
     isCorrect = quizQuestions[questionNumber].answers[1].correct
-    console.log(isCorrect)
     wrongOrRight(optionTwo);
     disableButtons();
-    questionNumber++;
-    setTimeout(function () {
-        displayQuestions(questionNumber);
-    }, 1000);
+    nextQuestion();
+
 })
 
 optionThree.addEventListener("click", function () {
     isCorrect = quizQuestions[questionNumber].answers[2].correct
-    console.log(isCorrect)
     wrongOrRight(optionThree);
     disableButtons();
-    questionNumber++;
-    setTimeout(function () {
-        displayQuestions(questionNumber);
-    }, 1000);
+    nextQuestion();
+
 })
 
 optionFour.addEventListener("click", function () {
     isCorrect = quizQuestions[questionNumber].answers[3].correct
-    console.log(isCorrect);
     wrongOrRight(optionFour);
     disableButtons();
-    questionNumber++;
-    setTimeout(function () {
-        displayQuestions(questionNumber);
-    }, 1000);
+    nextQuestion();
 })
 
-
-
 function wrongOrRight(whatsTheQuestion) {
-    console.log(whatsTheQuestion);
     if (isCorrect) {
         whatsTheQuestion.setAttribute("class", "btn btn-success btn-lg btn-block text-left disabled");
         score += 100;
@@ -154,100 +128,55 @@ function wrongOrRight(whatsTheQuestion) {
     } else {
         whatsTheQuestion.setAttribute("class", "btn btn-danger btn-lg btn-block text-left disabled");
         score -= 25;
-        timer -= 5;
+        timer -= 4;
         currentScore.innerHTML = score;
     }
 }
 
+//gets next question
+function nextQuestion() {
+    questionNumber++;
+    setTimeout(function () {
+        displayQuestions(questionNumber);
+    }, 1000);
+}
+
 //disable buttons after user selects answer
 function disableButtons() {
-    optionOne.disabled = true;
-    optionTwo.disabled = true;
-    optionThree.disabled = true;
-    optionFour.disabled = true;
+    for (i = 0; i < answerButtons.length; i++) {
+        answerButtons[i].disabled = true
+    }
 }
 
 //enable buttons with new question
 function enableButtons() {
-    optionOne.disabled = false;
-    optionTwo.disabled = false;
-    optionThree.disabled = false;
-    optionFour.disabled = false;
+    for (i = 0; i < answerButtons.length; i++) {
+        answerButtons[i].disabled = false;
+    }
 }
 //save scores
-
-// var playerNameScore = playerName;
-
-
-
 saveScoreBtn.addEventListener("click", function () {
-
-
-    // var playerName = nameInput.value
-    // console.log(playerName)
-    // console.log(typeof playerName)
-    // console.log("++++++++")
-
-    // var playerNameScore = playerName + "," + score
-
-    // // playerNameScoreString = JSON.stringify(playerNameScore)
-    // // console.log(playerNameScoreString)
-    // // console.log(typeof playerNameScoreString)
-    // // console.log("+++++++++++")
-
-
-    // var playerNameScoreArr = playerNameScore.split(",")
-
-    // var theLearderBoard = JSON.parse(localStorage.getItem("codeQuizLeaderScores"))
-    // console.log(theLearderBoard)
-    // console.log("++++++++++++++")
-
-
-    // console.log(playerNameScoreArr)
-    // console.log(typeof playerNameScoreArr)
-    // console.log("+++++++")
-
-
-
-    // localStorage.setItem("codeQuizLeaderScores", playerNameScore)
-
-    // for (i = 0; i < playerNameScoreArr.length; i++) {
-    //     leaderboardScores.append(playerNameScoreArr[0])
-    //     leaderboardScores.append(playerNameScoreArr[1])
-    // }
-
-    if (localStorage.getItem("codeQuizLeaderScores") === null) {
-        localStorage.setItem("codeQuizLeaderScores", "[]")
-    } else {
-        console.log("hi");
-    }
+    initLocalStorage();
     renderLearboard()
     var playerName = nameInput.value
-    console.log(playerName)
-    console.log(typeof playerName);
-    console.log("+++++")
-
+    if (playerName === null || playerName === "") {
+        alert("Please provide a name for your score.")
+    }
     var newScore = playerName + ": " + score
-
     var currentLeaderboard = JSON.parse(localStorage.getItem("codeQuizLeaderScores"))
-
     currentLeaderboard.push(newScore)
-
     localStorage.setItem("codeQuizLeaderScores", JSON.stringify(currentLeaderboard))
-
-    console.log(currentLeaderboard);
-    console.log(typeof currentLeaderboard);
-    console.log(currentLeaderboard.length)
-
     displayLeaderboard()
+    finalResultScreen.setAttribute("class", "container hide");
 })
 
 //see scores
 
 seeScoresBtn.addEventListener("click", function (event) {
+    initLocalStorage()
+    renderLearboard();
     displayLeaderboard()
     event.preventDefault();
-    console.log("you clicked me")
     leaderboardView.setAttribute("class", "container");
     finalResultScreen.setAttribute("class", "container hide");
     quizSection.setAttribute("class", "container hide");
@@ -255,30 +184,34 @@ seeScoresBtn.addEventListener("click", function (event) {
 
 })
 
+//loops through scores saved in local storage and prepends them to Recent Scores
 function displayLeaderboard() {
     var currentLeaderboard = JSON.parse(localStorage.getItem("codeQuizLeaderScores"))
     for (i = 0; i < currentLeaderboard.length; i++) {
         singleScore = currentLeaderboard[i];
         var para = document.createElement("p");
         para.classList.add("individualScore")
-        para.textContent = singleScore;
-        leaderboardScores.append(para)
+        para.textContent = singleScore + " points";
+        leaderboardScores.prepend(para)
     }
 }
-
-
 //clear leaderboard
-
 clearScoresBtn.addEventListener("click", function () {
     localStorage.removeItem("codeQuizLeaderScores")
-    leaderboardScores.innerHTML = ""
+    renderLearboard()
 })
 
-//empty leaderboard for new score
-
+//empty leaderboard scores on page
 function renderLearboard() {
     leaderboardScores.innerHTML = ""
 
+}
+
+//create leaderboard key in local storage
+function initLocalStorage() {
+    if (localStorage.getItem("codeQuizLeaderScores") === null) {
+        localStorage.setItem("codeQuizLeaderScores", "[]")
+    };
 }
 
 //quiz questions
