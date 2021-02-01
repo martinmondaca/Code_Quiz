@@ -221,20 +221,20 @@ var quizQuestions = [
             { d: "d. 2005", correct: false },
         ]
     }, {
-        question: "2. Which heading tag would give you the largest heading?",
+        question: "2. Select the array.",
         answers: [
-            { a: "a. &lt;h5&gt;", correct: false },
-            { b: "b. &lt;h1&gt;", correct: true },
-            { c: "c. &lt;h3&gt;", correct: false },
-            { d: "d. &lt;h6&gt;", correct: false }
+            { a: "a. var greeting = 'Hello World'", correct: false },
+            { b: "b. var greeting = ['Hello', 'World']", correct: true },
+            { c: "c. var greeting = 'Hello', 'World'", correct: false },
+            { d: "d. var greeting = 'Hello' + 'World'", correct: false }
         ]
     }, {
         question: "3. Which method would you use to remove whitespace from a string?",
         answers: [
-            { a: "a. trim()", correct: true },
-            { b: "b. parseFloat()", correct: false },
-            { c: "c. join()", correct: false },
-            { d: "d. concat()", correct: false }
+            { a: "a. .trim()", correct: true },
+            { b: "b. .parseFloat()", correct: false },
+            { c: "c. .join()", correct: false },
+            { d: "d. .concat()", correct: false }
         ]
     }, {
         question: "4. Which of the following is a boolean data type?",
@@ -245,28 +245,28 @@ var quizQuestions = [
             { d: "d. true", correct: true }
         ]
     }, {
-        question: "5. Which of the following is not a self-closing tag?",
+        question: "5. Which method would you use to call a function at specified intervals?",
         answers: [
-            { a: "a. &lt;img&gt;", correct: false },
-            { b: "b. &lt;a&gt;", correct: true },
-            { c: "c. &lt;meta&gt;", correct: false },
-            { d: "d. &lt;hr&gt;", correct: false }
+            { a: "a. clearInterval()", correct: false },
+            { b: "b. setInterval()", correct: true },
+            { c: "c. clearTimeout()", correct: false },
+            { d: "d. setTimeout()", correct: false }
         ]
     }, {
-        question: "6. What does CSS stand for?",
+        question: "6. Which method will round down to the nearest integer?",
         answers: [
-            { a: "a. Changing Style Sheets", correct: false },
-            { b: "b. Cascading Style Source", correct: false },
-            { c: "c. Cascading Style Sheets", correct: true },
-            { d: "d. Colorful Style Sheets", correct: false }
+            { a: "a. Math.min()", correct: false },
+            { b: "b. Math.random()", correct: false },
+            { c: "c. Math.floor()", correct: true },
+            { d: "d. Math.ceil()", correct: false }
         ]
     }, {
-        question: "7. Which of the following is not a programming language?",
+        question: "7. Which of these would be a correct way to declare a variable in JavaScript?",
         answers: [
-            { a: "a. C#", correct: false },
-            { b: "b. JavaScript", correct: false },
-            { c: "c. HTML", correct: true },
-            { d: "d. Python", correct: false }
+            { a: "a. variable currentWeather = 'sunny'", correct: false },
+            { b: "b. v currentWeather = 'sunny'", correct: false },
+            { c: "c. var currentWeather = 'sunny'", correct: true },
+            { d: "d. my var currentWeather = 'sunny'", correct: false }
         ]
     }, {
         question: "8. JavaScript variables cannot start with a(n) _____.",
@@ -285,12 +285,12 @@ var quizQuestions = [
             { d: "d. Brendan Eich", correct: true }
         ]
     }, {
-        question: "10. Which tag would you use to create an ordered list?",
+        question: "10. localStorage always saves data as a ___.",
         answers: [
-            { a: "a. &lt;ul&gt;", correct: false },
-            { b: "b. &lt;ol&gt;", correct: true },
-            { c: "c. &lt;li&gt;", correct: false },
-            { d: "d. &lt;dl&gt;", correct: false }
+            { a: "a. boolean", correct: false },
+            { b: "b. string", correct: true },
+            { c: "c. object", correct: false },
+            { d: "d. number", correct: false }
         ]
     }
 ];
