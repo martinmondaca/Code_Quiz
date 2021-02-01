@@ -31,3 +31,11 @@ section {
     font-size: 40px;
     color: green;
 }
+
+.makeRed{
+    color:red;
+}
+
+.makeGreen {
+    color:green;
+}

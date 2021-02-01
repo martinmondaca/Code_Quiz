@@ -23,7 +23,8 @@
                 <br>
                 <ul>
                     <li>You have 60 seconds on the clock to answer 10 questions.</li>
-                    <li>A correct answer will be highlighted green, and an incorrect answer will be highlighted red.
+                    <li>A correct answer will be highlighted <span class="makeGreen">green</span>, and an incorrect
+                        answer will be highlighted <span class="makeRed">red</span>.
                     </li>
                     <li>A correct answer earns you 100 points.</li>
                     <li>An incorrect answer loses you 25 points and 5 seconds.</li>
@@ -46,15 +47,15 @@
     <section class="container hide" id="quizHolder">
         <div class="row">
             <div class="col">
-                <h5>Timer: <span id="secondsLeft"></span> Seconds left</h5>
+                <h5>Timer: <strong><span id="secondsLeft"></span></strong> Seconds left</h5>
             </div>
             <div class="col">
-                <h5>Score: <span id="currentScore"></span></h5>
+                <h5>Score: <strong><span id="currentScore"></span></strong></h5>
             </div>
         </div>
         <div class="row">
             <div class="col">
-                <h3 id="currentQuestion">1. Question</h3>
+                <h3 id="currentQuestion">Question</h3>
             </div>
         </div>
         <div class="row">
